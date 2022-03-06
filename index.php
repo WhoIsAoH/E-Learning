@@ -110,8 +110,10 @@ include 'header.php';?>
             <!-- Card Header - Dropdown -->
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                <div class="dropdown no-arrow">
+                <h6 class="m-0 font-weight-bold text-primary">News</h6>
+                <p> </p>
+
+                <!-- <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -123,7 +125,7 @@ include 'header.php';?>
                         <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!-- Card Body -->
@@ -320,11 +322,8 @@ include 'header.php';?>
                 <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
             </div>
             <div class="card-body">
-                <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                    CSS bloat and poor page performance. Custom CSS classes are used to create
-                    custom components and custom utility classes.</p>
-                <p class="mb-0">Before working with this theme, you should become familiar with the
-                    Bootstrap framework, especially the utility classes.</p>
+                <p>add some text if needed</p>
+                <p class="mb-0">adding text.</p>
             </div>
         </div>
 
