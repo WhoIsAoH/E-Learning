@@ -16,14 +16,14 @@ include 'header.php';?>
 <!-- Content Row -->
 <div class="row">
 
-    <!-- Earnings (Monthly) Card Example -->
+    <!-- No Of available  -->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Earnings (Monthly)</div>
+                            Total No Of Resources</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
                     </div>
                     <div class="col-auto">
@@ -41,7 +41,7 @@ include 'header.php';?>
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Earnings (Annual)</div>
+                            Resources Enrolled</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
                     </div>
                     <div class="col-auto">
@@ -53,7 +53,7 @@ include 'header.php';?>
     </div>
 
     <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
+    <!-- <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-info shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -79,7 +79,7 @@ include 'header.php';?>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Pending Requests Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
@@ -88,7 +88,7 @@ include 'header.php';?>
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Pending Requests</div>
+                            Resource Requests</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                     </div>
                     <div class="col-auto">
@@ -110,7 +110,7 @@ include 'header.php';?>
             <!-- Card Header - Dropdown -->
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">News</h6>
+                <a h6 href="header.php" class="m-0 font-weight-bold text-primary">News</h6 ></a> 
                 <p> </p>
 
                 <!-- <div class="dropdown no-arrow">
@@ -125,14 +125,33 @@ include 'header.php';?>
                         <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
-                    </div> -->
-                </div>
+                    </div>
+                </div> -->
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div class="chart-area">
+                <!-- <div class="chart-area">
                     <canvas id="myAreaChart"></canvas>
-                </div>
+                    testing 
+                </div> -->
+                <?php
+                    if (!$conn)
+                    {
+                    die('Could not connect: ' . mysqli_error());
+                    }
+                    $sql = "SELECT news_id, news_topic FROM news";
+                    $result = mysqli_query($conn,$sql);
+                   
+                    echo "<table class='table table-borderless  p-3' align='center' >";
+                    while($row = mysqli_fetch_array($result))
+                    {
+                    echo "<tr>";
+                    echo "<td>" . $row['news_topic'] . "</td>";
+                    echo "</tr>";
+                    }
+                    echo "</table>";
+                    mysqli_close($conn);
+                ?>
             </div>
         </div>
     </div>
@@ -333,8 +352,10 @@ include 'header.php';?>
 </div>
 <!-- /.container-fluid -->
 
-</div>
+<!-- </div> -->
 <!-- End of Main Content -->
+
 </body>
-</html>
 <?php include 'footer.php';?>
+</html>
+
