@@ -88,7 +88,7 @@ if(isset($_POST["update"]))
                                                      </select>
 										</div>
 										<div class="form-group">
-											<input class="btn btn-success" type="submit" name="update" value="Add New">
+											<input class="btn btn-success" type="submit" name="update" value="Add Resource">
 										</div>
 									</form>
                                     </div>

@@ -75,16 +75,16 @@ if(isset($_POST["update"]))
 										<select name="n_type1">
                                                         <option disabled selected>Select</option>
                                                         <?php
-                                                        $query2="Select news_type_name From resourceType";
+                                                        $query2="Select news_type From newsType";
                                                         $records=mysqli_query($conn,$query2);
                                                         while ($data = mysqli_fetch_array($records)){
-                                                            echo "<option name='".$data['n_type1']."'>".$data['resource_type_name']."</option>";
+                                                            echo "<option name='".$data['n_type1']."'>".$data['news_type']."</option>";
                                                         }
                                                         ?>
                                                      </select>
 											</div>
 										<div class="form-group">
-											<input class="btn btn-success" type="submit" name="update" value="Add New">
+											<input class="btn btn-success" type="submit" name="update" value="Add News">
 										</div>
 										</form>
                                     </div>
