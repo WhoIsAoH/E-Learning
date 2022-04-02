@@ -1,13 +1,6 @@
 <?php include 'conn.php';
-include 'header.php';
-$countNews = "Select * from news";
-    $CNresult = mysqli_query($conn, $countNews);
-    $CNnum = mysqli_num_rows($CNresult);
-    
+include 'header.php';?>
 
-?>
-
-<!DOCTYPE html>
 <html lang="en">
 
 <?php include 'header.php'?>
@@ -31,9 +24,8 @@ $countNews = "Select * from news";
                 <div class="container-fluid">
 
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
+<div class="align-baseline">
     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    <a href="add_news.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add News</a>
 </div>
 
 <!-- Content Row -->
@@ -123,17 +115,34 @@ $countNews = "Select * from news";
     </div>
 </div>
 
+<!-- Content Row -->
 
-                    <div class="row">
+<div class="row">
 
     <!-- Area Chart -->
-    <div class="col-xl-5 col-lg-5">
+    <div class="col-xl-8 col-lg-7">
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <a h6 href="news.php" class="m-0 font-weight-bold text-primary">News</h6 ></a> 
+                <a h6 href="resource.php" class="m-0 font-weight-bold text-primary">resource</h6 ></a> 
                 <p> </p>
+
+                <!-- <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Dropdown Header:</div>
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div> -->
             </div>
             <!-- Card Body -->
             <div class="card-body">
@@ -146,48 +155,14 @@ $countNews = "Select * from news";
                     {
                     die('Could not connect: ' . mysqli_error());
                     }
-                    $Nsql = "SELECT news_id, news_topic FROM news";
-                    $Nresult = mysqli_query($conn,$Nsql);
+                    $sql = "SELECT news_id, news_topic FROM news";
+                    $result = mysqli_query($conn,$sql);
                    
                     echo "<table class='table table-borderless  p-3' align='center' >";
-                    while($row = mysqli_fetch_array($Nresult))
+                    while($row = mysqli_fetch_array($result))
                     {
                     echo "<tr>";
                     echo "<td>" . $row['news_topic'] . "</td>";
-                    echo "</tr>";
-                    }
-                    echo "</table>";
-                ?>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-5 col-lg-5">
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div
-                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <a h6 href="news.php" class="m-0 font-weight-bold text-primary">Resources</h6 ></a> 
-                <p> </p>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <!-- <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
-                    testing 
-                </div> -->
-                <?php
-                    if (!$conn)
-                    {
-                    die('Could not connect: ' . mysqli_error());
-                    }
-                    $Rsql = "SELECT resource_name FROM resource";
-                    $Rresult = mysqli_query($conn,$Rsql);
-                    
-                    echo "<table class='table table-borderless  p-3' align='center' >";
-                    while($row = mysqli_fetch_array($Rresult))
-                    {
-                    echo "<tr>";
-                    echo "<td>" . $row['resource_name'] . "</td>";
                     echo "</tr>";
                     }
                     echo "</table>";
@@ -195,18 +170,58 @@ $countNews = "Select * from news";
                 ?>
             </div>
         </div>
-    </div>               
-    
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Dropdown Header:</div>
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <canvas id="myPieChart"></canvas>
+                </div>
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-primary"></i> Direct
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-success"></i> Social
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-info"></i> Referral
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-                    <!-- Content Row -->
-                
 
-                </div>
-                <!-- /.container-fluid -->
+</div>
+<!-- /.container-fluid -->
 
-            </div>
-<?php include 'footer.php';?>
+<!-- </div> -->
+<!-- End of Main Content -->
+
 </body>
-
+<?php include 'footer.php';?>
 </html>
