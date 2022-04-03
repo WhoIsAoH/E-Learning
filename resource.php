@@ -156,7 +156,7 @@ include 'header.php';?>
                         {
                             die('Could not connect: ' . mysqli_error());
                         }
-                        $sql = "SELECT resource_name FROM resource";
+                        $sql = "SELECT resource_id, resource_name FROM resource";
                         $result = mysqli_query($conn,$sql);
                     
                         echo "<table class='table table-borderless  p-3' align='center' >";
@@ -164,7 +164,8 @@ include 'header.php';?>
                         {
                         echo "<tr>";
                         echo "<td>" . $row['resource_name'] . "</td>";
-                        echo "<td style='float: right'>"."<a class='btn btn-success' href='enroll_resource.php?enroll=$id'>view</a>"." \t"."<a class='btn btn-primary' href='edit_resource.php?edit=$id'>Edit</a>"." \t"."<a class='btn btn-danger' href='delete_resource.php?del=$id'>delete</a>"."</td>";
+                        $id=$row['resource_id'];
+                        echo "<td style='float: right'>"."<a class='btn btn-success' href='enroll_resource.php?enroll=$id'>Enroll</a>"." \t"."<a class='btn btn-primary' href='edit_resource.php?edit=$id'>Edit</a>"." \t"."<a class='btn btn-danger' href='delete_resource.php?del=$id'>delete</a>"."</td>";
                         echo "</tr>";
                         }
                         echo "</table>";

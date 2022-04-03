@@ -51,7 +51,7 @@ $row=mysqli_fetch_array($run);
 
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
+                            <div>
                                 
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -63,7 +63,7 @@ $row=mysqli_fetch_array($run);
                                         </div>
                                         <div class="form-group">
                                             <label >News Description</label>
-                                            <textarea class="form-control" rows="3" name="n_description1"><?php echo $e_description ;?></textarea>
+                                            <textarea class="form-control" rows="5" name="n_description1"><?php echo $e_description ;?></textarea>
                                         </div>
                                         <div class="form-group">
                                         <label >News Type:</label>

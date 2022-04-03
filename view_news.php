@@ -1,6 +1,4 @@
-<?php include 'conn.php';
-include 'components.php'; 
-include 'header.php';?>
+<?php include 'conn.php';?>
 
 <?php 
 

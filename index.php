@@ -1,10 +1,9 @@
+
 <?php include 'conn.php';
 include 'header.php';
 $countNews = "Select * from news";
     $CNresult = mysqli_query($conn, $countNews);
     $CNnum = mysqli_num_rows($CNresult);
-    
-
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +32,7 @@ $countNews = "Select * from news";
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    <a href="add_news.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add News</a>
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">kei rakhnu pareoo yeha</a>
 </div>
 
 <!-- Content Row -->
@@ -166,7 +165,7 @@ $countNews = "Select * from news";
             <!-- Card Header - Dropdown -->
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <a h6 href="news.php" class="m-0 font-weight-bold text-primary">Resources</h6 ></a> 
+                <a h6 href="resource.php" class="m-0 font-weight-bold text-primary">Resources</h6 ></a> 
                 <p> </p>
             </div>
             <!-- Card Body -->

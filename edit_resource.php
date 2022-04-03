@@ -1,25 +1,20 @@
 <?php include 'conn.php';?>
-<?php
-if(isset($_POST["update"]))
-   {
-    $n_name =   $_POST['n_name1'];
-    $n_origin =   $_POST['n_origin1'];
-    $n_description  =  $_POST['n_description1'];
-    $n_type = $_POST['n_type1'];
 
-    $query1="INSERT INTO `resource` (`resource_name`, `resource_origin`, `resource_description`, `resource_type`) VALUES ('$n_name', '$n_origin', '$n_description' , '$n_type')";
-    
-    if(mysqli_query($conn,$query1))
-	{
-	   echo "<script>window.open('resource.php?updated=Record Has Been Updated','_self')</script>";
-	}
-	else{
-		echo "<div class='alert alert-danger' role='alert'> <b> Error!!! </b> <br>This Number is already in use. Please check the number you are trying to update</div>";
-	echo $query1;
-	}
-}
+<?php 
 
+$edit_id=@$_GET['edit'];
+$query = "select * from resource where resource_id ='$edit_id' ";
+$run= mysqli_query($conn,$query);
+
+$row=mysqli_fetch_array($run);
+
+    $e_name =   $row['resource_name'];
+    $e_origin =   $row['resource_origin'];
+    $e_description  =  $row['resource_description'];
+    $e_type = $row['resource_type'];
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,11 +40,8 @@ if(isset($_POST["update"]))
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Add Resource</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Edit Resource<?php echo $e_name ;?></h1>
                     </div>
-
-                    <!-- Content Row -->
-                  
 
                     <!-- Content Row -->
 
@@ -64,20 +56,20 @@ if(isset($_POST["update"]))
                                     <form method="post" action="">
 										<div class="form-group">
 											<label>Resource Name</label>
-											<input type="text" class="form-control"  placeholder="Resource Name" name="n_name1">
+											<input type="text" class="form-control"  name="n_name1" value='<?php echo $e_name;?>' >
 										</div>
                                         <div class="form-group">
 											<label>Resource Origin</label>
-											<input type="text" class="form-control"  placeholder="Resource Origin" name="n_origin1">
+											<input type="text" class="form-control"  name="n_origin1" value="<?php echo $e_origin;?>">
 										</div>
 										<div class="form-group">
 											<label >Resource Description</label>
-											<textarea class="form-control"  rows="5" placeholder="Resource Description" name="n_description1"></textarea>
+											<textarea class="form-control"  rows="5" name="n_description1"><?php echo $e_description;?></textarea>
 										</div>
 										<div class="form-group">
                                             <label >News Type:</label>
-										    <select name="n_type1">
-                                                        <option disabled selected>Select</option>
+										    <select name="n_type1" value="<?php echo $e_types;?>">
+                                                        <option disabled selected>:<?php echo $e_type;?></option>
                                                         <?php
                                                         $query2="Select resource_type_name From resourceType";
                                                         $records=mysqli_query($conn,$query2);
@@ -90,6 +82,28 @@ if(isset($_POST["update"]))
 										<div class="form-group">
 											<input class="btn btn-success" type="submit" name="update" value="Add Resource">
 										</div>
+                                        <?php
+                                            if(isset($_POST["update"]))
+                                            {
+                                            $n_name =   $_POST['n_name1'];
+                                            $n_origin =   $_POST['n_origin1'];
+                                            $n_description  =  $_POST['n_description1'];
+                                            $n_type = $_POST['n_type1'];
+
+                                            // $query1="UPDATE resource SET (`resource_name`, `resource_origin`, `resource_description`, `resource_type`) VALUES ('$n_name', '$n_origin', '$n_description' , '$n_type') where news_id='$edit_id'";
+                                            $query1= "UPDATE resource SET resource_name='$n_name', resource_origin='$n_origin', resource_description='$n_description', resource_type='$n_type' where resource_id='$edit_id'";
+
+                                            if(mysqli_query($conn,$query1))
+                                            {
+                                                echo "<script>window.open('resource.php?updated=Record Has Been Updated','_self')</script>";
+                                            }
+                                            else{
+                                                echo "<div class='alert alert-danger' role='alert'> <b> Error!!! </b> <br>This Number is already in use. Please check the number you are trying to update</div>";
+                                            echo $query1;
+                                            }
+                                            }
+
+                                        ?>
 									</form>
                                     </div>
                                 </div>
