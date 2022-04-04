@@ -1,6 +1,12 @@
+<?php
+session_start();
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
+    header("location: login.php");
+    exit;
+}
+?>
 
 <?php include 'conn.php';
-include 'header.php';
 $countNews = "Select * from news";
     $CNresult = mysqli_query($conn, $countNews);
     $CNnum = mysqli_num_rows($CNresult);

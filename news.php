@@ -1,5 +1,13 @@
-<?php include 'conn.php';
-include 'header.php';?>
+<?php
+session_start();
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
+    header("location: login.php");
+    exit;
+}
+?>
+
+
+<?php include 'conn.php';?>
 
 <html lang="en">
 
@@ -162,6 +170,7 @@ include 'header.php';?>
                     while($row = mysqli_fetch_array($result))
                     {
                     echo "<tr>";
+                    echo "<td>" . $users_id . "</td>";
                     echo "<td>" . $row['news_topic'] . "</td>";
                     $id=$row['news_id'];
                     echo "<td style='float: right'>"."<a class='btn btn-success' href='view_news.php?view=$id'>view</a>"." \t"."<a class='btn btn-primary' href='edit_news.php?edit=$id'>Edit</a>"." \t"."<a class='btn btn-danger' href='delete_news.php?del=$id'>delete</a>"."</td>";

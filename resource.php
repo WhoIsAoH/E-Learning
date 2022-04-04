@@ -1,5 +1,12 @@
-<?php include 'conn.php';
-include 'header.php';?>
+<?php
+session_start();
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
+    header("location: login.php");
+    exit;
+}
+?>
+
+<?php include 'conn.php';?>
 
 <html lang="en">
 
