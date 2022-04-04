@@ -52,20 +52,6 @@ if(!isset($_SESSION['loggedinAsStudent']) || $_SESSION['loggedinAsStudent']!=tru
                 <a h6 href="resource.php" class="m-0 font-weight-bold text-primary">Resources Enrolled</h6 ></a> 
                 <p> </p>
 
-                <!-- <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                        aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div> -->
             </div>
             <!-- Card Body -->
             <div class="card-body">
@@ -74,12 +60,13 @@ if(!isset($_SESSION['loggedinAsStudent']) || $_SESSION['loggedinAsStudent']!=tru
                     testing 
                 </div> -->
                 <?php
+                $id_user = $_SESSION['user_id'];
                     if (!$conn)
                     {
                     die('Could not connect: ' . mysqli_error());
                     }
                     // $sql = "SELECT record_id, resource_ids FROM resourceRequest";
-                    $sql= " select record.record_id, record.resource_ids ,resource.resource_name FROM record, resource where record.resource_ids=resource.resource_id";
+                    $sql= " select record.record_id, record.resource_ids ,resource.resource_name FROM record, resource where (record.resource_ids=resource.resource_id AND user_ids= $id_user)";
                     $result = mysqli_query($conn,$sql);
                    
                     echo "<table class='table table-borderless  p-3' align='center' >";
