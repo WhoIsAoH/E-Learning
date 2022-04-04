@@ -10,31 +10,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // $sql = "Select * from users where username='$username' AND password='$password'";
     $sql = "Select * from user where user_name='$username'";
     $result = mysqli_query($conn, $sql);
+
     $num = mysqli_num_rows($result);
     if ($num == 1){
         while($row=mysqli_fetch_assoc($result)){
-            if ($password == $row['user_password']){ 
+            $user_id = $row['user_id'];
+            if (($password == $row['user_password']) && ($row['user_type_ids'] == 1)){ 
                 $login = true;
                 session_start();
-                $_SESSION['loggedin'] = true;
-                $_SESSION['user_id'] = $users_id;
+                $_SESSION['loggedinAsAdmin'] = true;
+                $_SESSION['user_username'] = $username;
+                $_SESSION['user_id'] = $user_id;
                 header("location: index.php");
                 // echo '$sql';
+                
+                echo "test".$_SESSION['user_id'].$_SESSION['user_username'];
             } 
             else{
-                $showError = "Invalid Credentials111";
+                $showError = "Invalid Credentials";
                 // echo $sql;
                 // echo $result;
-                echo $num;
-                echo $password;
-                echo $row['user_password'];
+                // echo $num;
+                // echo $password;
+                // echo $row['user_password'];
             }
         }
         
     } 
     else{
         $showError = "Invalid Credentials";
-        echo $sql;
+        // echo $sql;
     }
 }
     
@@ -53,13 +58,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>E-Learning - Login</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -140,14 +145,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
 </body>
 

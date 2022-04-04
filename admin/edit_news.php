@@ -1,11 +1,4 @@
-<?php
-session_start();
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
-    header("location: login.php");
-    exit;
-}
-?>
-
+<?php include 'auth.php';?>
 <?php include 'conn.php';?>
 
 <?php 

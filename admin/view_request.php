@@ -1,25 +1,18 @@
-<?php
-session_start();
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
-    header("location: login.php");
-    exit;
-}
-?>
-
+<?php include 'auth.php';?>
 <?php include 'conn.php';?>
 
 <?php 
 
 $view_id=@$_GET['view'];
-$query = "select * from news where news_id ='$view_id' ";
+$query = "select * from resourceRequest where request_id ='$view_id' ";
 $run= mysqli_query($conn,$query);
 
 $row=mysqli_fetch_array($run);
 
 	// $e_id =  $row['m_id'];
-	$e_topic =   $row['news_topic'];
-	$e_description = $row['news_description'];
-	$e_types = $row['news_types'];
+	$e_name =   $row['request_name'];
+    $e_origin =   $row['request_origin'];
+    $e_description  =  $row['request_description'];
 ?>
 
 <html lang="en">
@@ -46,23 +39,22 @@ $row=mysqli_fetch_array($run);
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><?php echo $e_topic;?></h1>
+    <h1 class="h2 mb-0 text-gray-800"><?php echo $e_name;?></h1>
 </div>
 
 <div class="row">
 
     <!-- Area Chart -->
-    <div class="col-xl-10 col-lg-7">
+    <div class="col-xl-12 col-lg-7">
         <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <!-- <div
-                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h5 href="news.php" class="m-0 font-weight-bold text-primary"><?php echo $e_topic;?></h5 >
-                <p> </p>
-            </div> -->
             <!-- Card Body -->
             <div class="card-body">
-				<p class="h4"><?php echo $e_description;?></h4>
+            <!-- <h3>Origin:</h3> -->
+            <p class="h3"><?php echo $e_origin;?></h3>
+            <br><br>
+            	<p class="h4"><?php echo $e_description;?></h4>
+                <!-- <p class="h4"><?php echo $e_file;?></h4> -->
+                <p class="h5"><?php echo $e_type;?></h5>
             </div>
         </div>
     </div>

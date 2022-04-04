@@ -1,11 +1,4 @@
-<?php
-session_start();
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
-    header("location: login.php");
-    exit;
-}
-?>
-
+<?php include 'auth.php';?>
 <?php include 'conn.php';?>
 <?php
 
@@ -13,11 +6,11 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
 
 //creating variables to store del from view.php
 
-$enroll_record=$_GET['en'];
+$delete_record=$_GET['del'];
 
 // query to delete
 
-$query="INSERT into `record` WHERE `record_id` = '$enroll_record'";
+$query="DELETE FROM `news` WHERE `news_id` = '$delete_record'";
 
 // creating deleted variable to display message
 

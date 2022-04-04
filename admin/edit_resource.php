@@ -1,11 +1,4 @@
-<?php
-session_start();
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
-    header("location: login.php");
-    exit;
-}
-?>
-
+<?php include 'auth.php';?>
 <?php include 'conn.php';?>
 
 <?php 
@@ -19,6 +12,7 @@ $row=mysqli_fetch_array($run);
     $e_name =   $row['resource_name'];
     $e_origin =   $row['resource_origin'];
     $e_description  =  $row['resource_description'];
+    $e_file = $row['resource_file'];
     $e_type = $row['resource_type'];
 ?>
 
@@ -61,7 +55,7 @@ $row=mysqli_fetch_array($run);
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
-                                    <form method="post" action="">
+                                    <form method="post" action="" enctype="multipart/form-data">
 										<div class="form-group">
 											<label>Resource Name</label>
 											<input type="text" class="form-control"  name="n_name1" value='<?php echo $e_name;?>' >
@@ -74,6 +68,10 @@ $row=mysqli_fetch_array($run);
 											<label >Resource Description</label>
 											<textarea class="form-control"  rows="5" name="n_description1"><?php echo $e_description;?></textarea>
 										</div>
+                                        <div class="form-group">
+                                            <label >Upload File</label>
+                                            <input type="file" class="form-control-file" name="n_file1" value="<?php echo $e_file;?>" >
+                                        </div>
 										<div class="form-group">
                                             <label >News Type:</label>
 										    <select name="n_type1" value="<?php echo $e_types;?>">
@@ -88,7 +86,7 @@ $row=mysqli_fetch_array($run);
                                                      </select>
 										</div>
 										<div class="form-group">
-											<input class="btn btn-success" type="submit" name="update" value="Add Resource">
+											<input class="btn btn-success" type="submit" name="update" value="Edit Resource">
 										</div>
                                         <?php
                                             if(isset($_POST["update"]))
@@ -96,10 +94,11 @@ $row=mysqli_fetch_array($run);
                                             $n_name =   $_POST['n_name1'];
                                             $n_origin =   $_POST['n_origin1'];
                                             $n_description  =  $_POST['n_description1'];
+                                            $n_file= $POST['n_file1'];
                                             $n_type = $_POST['n_type1'];
 
                                             // $query1="UPDATE resource SET (`resource_name`, `resource_origin`, `resource_description`, `resource_type`) VALUES ('$n_name', '$n_origin', '$n_description' , '$n_type') where news_id='$edit_id'";
-                                            $query1= "UPDATE resource SET resource_name='$n_name', resource_origin='$n_origin', resource_description='$n_description', resource_type='$n_type' where resource_id='$edit_id'";
+                                            $query1= "UPDATE resource SET resource_name='$n_name', resource_origin='$n_origin', resource_description='$n_description', resource_file='$n_file', resource_type='$n_type' where resource_id='$edit_id'";
 
                                             if(mysqli_query($conn,$query1))
                                             {

@@ -1,11 +1,4 @@
-<?php
-session_start();
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
-    header("location: login.php");
-    exit;
-}
-?>
-
+<?php include 'auth.php';?>
 <?php include 'conn.php';?>
 <?php
 if(isset($_POST["update"]))
@@ -14,8 +7,26 @@ if(isset($_POST["update"]))
     $n_origin =   $_POST['n_origin1'];
     $n_description  =  $_POST['n_description1'];
     $n_type = $_POST['n_type1'];
+    
+    $file= $_FILES['n_file1'];
+    $fileName= $_FILES['file']['name'];
+    $fileTmpName = $_FILES['file']['tmp_name'];
+    $fileNameNew = uniqid('',true).".".$fileActualExt;
+    
+    
+    $fileExt = explode('.',$filename);
+    $fileActualExt = strtolower(end($fileExt));
+    $allowed = array('jpg','jpeg', 'png', 'pdf');
 
-    $query1="INSERT INTO `resource` (`resource_name`, `resource_origin`, `resource_description`, `resource_type`) VALUES ('$n_name', '$n_origin', '$n_description' , '$n_type')";
+    $fileDestination = '/uploads/'.'/'.$fileNameNew;
+    move_uploaded_file($fileTmpName, $fileDestination);
+    header("location: resource.php");
+
+    $destdir = '/ap/webDev/E-Learning/uploads';
+  $img=file_get_contents($link);
+  file_put_contents($destdir.substr($link,strrpos($link,'/')),$img);
+
+    $query1="INSERT INTO `resource` (`resource_name`, `resource_origin`, `resource_description`,`resource_file`, `resource_type`) VALUES ('$n_name', '$n_origin', '$n_description', '$file' , '$n_type')";
     
     if(mysqli_query($conn,$query1))
 	{
@@ -69,7 +80,7 @@ if(isset($_POST["update"]))
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
-                                    <form method="post" action="">
+                                    <form action="#" method="post" enctype="multipart/form-data">
 										<div class="form-group">
 											<label>Resource Name</label>
 											<input type="text" class="form-control"  placeholder="Resource Name" name="n_name1">
@@ -82,6 +93,10 @@ if(isset($_POST["update"]))
 											<label >Resource Description</label>
 											<textarea class="form-control"  rows="5" placeholder="Resource Description" name="n_description1"></textarea>
 										</div>
+                                        <div class="form-group">
+                                            <label >Upload File</label>
+                                            <input type="file" class="form-control-file" name="n_file1">
+                                        </div>
 										<div class="form-group">
                                             <label >News Type:</label>
 										    <select name="n_type1">
@@ -112,6 +127,8 @@ if(isset($_POST["update"]))
                 <!-- /.container-fluid -->
 
             </div>
+        </div>
+    </div>
 <?php include 'footer.php';?>
 </body>
 
