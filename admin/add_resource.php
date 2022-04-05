@@ -16,22 +16,23 @@ if(isset($_POST["update"]))
     
     $fileExt = explode('.',$filename);
     $fileActualExt = strtolower(end($fileExt));
-    $allowed = array('jpg','jpeg', 'png', 'pdf');
+    $allowed = array('.pdf'=>'application/pdf');
 
-    $fileDestination = '/uploads/'.'/'.$fileNameNew;
+    $fileDestination = '../uploads/'.'/'.$fileNameNew;
     move_uploaded_file($fileTmpName, $fileDestination);
     header("location: resource.php");
 
-    $destdir = '/ap/webDev/E-Learning/uploads';
-  $img=file_get_contents($link);
-  file_put_contents($destdir.substr($link,strrpos($link,'/')),$img);
+//     $destdir = '/ap/webDev/E-Learning/uploads';
+//   $img=file_get_contents($link);
+//   file_put_contents($destdir.substr($link,strrpos($link,'/')),$img);
 
     $query1="INSERT INTO `resource` (`resource_name`, `resource_origin`, `resource_description`,`resource_file`, `resource_type`) VALUES ('$n_name', '$n_origin', '$n_description', '$file' , '$n_type')";
     
     if(mysqli_query($conn,$query1))
 	{
-	   echo "<script>window.open('resource.php?updated=Record Has Been Updated','_self')</script>";
-	}
+	//    echo "<script>window.open('resource.php?updated=Record Has Been Updated','_self')</script>";
+    echo $query1;
+}
 	else{
 		echo "<div class='alert alert-danger' role='alert'> <b> Error!!! </b> <br>This Number is already in use. Please check the number you are trying to update</div>";
 	echo $query1;
