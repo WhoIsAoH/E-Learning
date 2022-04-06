@@ -9,7 +9,7 @@ $run= mysqli_query($conn,$query);
 
 $row=mysqli_fetch_array($run);
 
-	// $e_id =  $row['m_id'];
+    $e_id =  $row['user_ids'];  
 	$e_bio = $row['user_bio'];
 	$e_interest = $row['user_interest'];
  ?>
@@ -73,10 +73,14 @@ $row=mysqli_fetch_array($run);
 												{
 													$n_bio  =  $_POST['n_bio1'];
 													$n_interest = $_POST['n_interest1'];
-
+                                                    if($e_id == NULL){
+                                                        $query1= "INSERT INTO `userProfile`(`user_ids`, `user_bio`, `user_interest`) VALUES ('$edit_id','$n_bio','$n_interest')";
+                                                    }
+                                                    else{
 													// $query1="UPDATE INTO `news` (`news_id`, `news_topic`, `news_description`, `news_types`) VALUES (NULL, '$n_topic', '$n_description', '$n_type') where c_id='$edit_id' ";
-													$query1= "UPDATE userProfile SET user_bio='$n_bio', user_interest='$n_interest' where user_ids='$edit_id'";
-													if(mysqli_query($conn,$query1)){
+													$query1= "UPDATE userProfile SET user_bio='$n_bio', user_interest='$n_interest' where user_ids='$e_id'";
+                                                    }
+                                                    if(mysqli_query($conn,$query1)){
 														echo "<script>window.open('index.php?updated=Record Has Been Updated','_self')</script>";
                                                         echo $query1;
 													}
