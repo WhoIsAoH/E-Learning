@@ -1,38 +1,34 @@
 <?php include 'auth.php';?>
 <?php include 'conn.php';?>
 <?php
-if(isset($_POST["update"]))
+if(isset($_POST["submit"]))
    {
     $n_name =   $_POST['n_name1'];
     $n_origin =   $_POST['n_origin1'];
     $n_description  =  $_POST['n_description1'];
     $n_type = $_POST['n_type1'];
     
-    $file= $_FILES['n_file1'];
-    $fileName= $_FILES['file']['name'];
+    $file= $_FILES['file'];
+    $fileName= $file['name'];
     $fileTmpName = $_FILES['file']['tmp_name'];
-    $fileNameNew = uniqid('',true).".".$fileActualExt;
     
-    
-    $fileExt = explode('.',$filename);
-    $fileActualExt = strtolower(end($fileExt));
-    $allowed = array('.pdf'=>'application/pdf');
+    // $fileExt = explode('.',$filename);
+    // $fileActualExt = strtolower(end($fileExt));
+    // $allowed = array('jpg','jpeg','png','pdf');
 
-    $fileDestination = '../uploads/'.'/'.$fileNameNew;
+    // $fileNameNew = $n_name.".".$fileActualExt;
+
+    $fileDestination = '../uploads/'.$fileName;
     move_uploaded_file($fileTmpName, $fileDestination);
     header("location: resource.php");
 
-//     $destdir = '/ap/webDev/E-Learning/uploads';
-//   $img=file_get_contents($link);
-//   file_put_contents($destdir.substr($link,strrpos($link,'/')),$img);
-
-    $query1="INSERT INTO `resource` (`resource_name`, `resource_origin`, `resource_description`,`resource_file`, `resource_type`) VALUES ('$n_name', '$n_origin', '$n_description', '$file' , '$n_type')";
+    $query1="INSERT INTO `resource` (`resource_name`, `resource_origin`, `resource_description`,`resource_file_name`, `resource_type`) VALUES ('$n_name', '$fileDestination', '$n_description', '$fileName' , '$n_type')";
     
     if(mysqli_query($conn,$query1))
 	{
-	//    echo "<script>window.open('resource.php?updated=Record Has Been Updated','_self')</script>";
-    echo $query1;
-}
+	   echo "<script>window.open('resource.php?updated=Record Has Been Updated','_self')</script>";
+    // echo $query1;
+    }   
 	else{
 		echo "<div class='alert alert-danger' role='alert'> <b> Error!!! </b> <br>This Number is already in use. Please check the number you are trying to update</div>";
 	echo $query1;
@@ -81,22 +77,22 @@ if(isset($_POST["update"]))
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
-                                    <form action="#" method="post" enctype="multipart/form-data">
+                                    <form action="" method="post" enctype="multipart/form-data">
 										<div class="form-group">
 											<label>Resource Name</label>
 											<input type="text" class="form-control"  placeholder="Resource Name" name="n_name1">
 										</div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
 											<label>Resource Origin</label>
 											<input type="text" class="form-control"  placeholder="Resource Origin" name="n_origin1">
-										</div>
+										</div> -->
 										<div class="form-group">
 											<label >Resource Description</label>
 											<textarea class="form-control"  rows="5" placeholder="Resource Description" name="n_description1"></textarea>
 										</div>
                                         <div class="form-group">
                                             <label >Upload File</label>
-                                            <input type="file" class="form-control-file" name="n_file1">
+                                            <input type="file" class="form-control-file" name="file">
                                         </div>
 										<div class="form-group">
                                             <label >News Type:</label>
@@ -112,7 +108,7 @@ if(isset($_POST["update"]))
                                                      </select>
 										</div>
 										<div class="form-group">
-											<input class="btn btn-success" type="submit" name="update" value="Add Resource">
+											<input class="btn btn-success" type="submit" name="submit" value="Add Resource">
 										</div>
 									</form>
                                     </div>

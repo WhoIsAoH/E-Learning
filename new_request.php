@@ -1,11 +1,4 @@
-<?php
-session_start();
-if(!isset($_SESSION['loggedinAsStudent']) || $_SESSION['loggedinAsStudent']!=true){
-    header("location: login.php");
-    exit;
-}
-?>
-
+<?php include 'auth.php';?>
 <?php include 'conn.php';?>
 <?php
 if(isset($_POST["update"]))
@@ -15,8 +8,7 @@ if(isset($_POST["update"]))
     $n_description  =  $_POST['n_description1'];
     $n_type = $_POST['n_type1'];
     $n_user = $_SESSION['user_id'];
-    $query1="INSERT INTO `resourceRequest` (`request_name`, `resource_origin`, `request_description`, `resource_type_ids`, `user_ids`) VALUES ('$n_name', '$n_origin', '$n_description' , '$n_type', '$n_user')";
-    // $query1= "INSERT INTO resource "
+    $query1="INSERT INTO `resourceRequest` (`request_name`, `request_origin`, `request_description`, `request_type`, `user_ids`) VALUES ('$n_name', '$n_origin', '$n_description' , '$n_type', '$n_user')";
     if(mysqli_query($conn,$query1))
 	{
 	   echo "<script>window.open('resource.php?updated=Record Has Been Updated','_self')</script>";
@@ -64,7 +56,7 @@ if(isset($_POST["update"]))
                     <div class="row">
 
                         <!-- Area Chart -->
-                        <div class="col-xl-10 col-lg-8">
+                        <div class="col-xl-12 col-lg-8">
                             <div>
                                 <!-- Card Body -->
                                 <div class="card-body">

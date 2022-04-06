@@ -12,7 +12,7 @@ $row=mysqli_fetch_array($run);
     $e_name =   $row['resource_name'];
     $e_origin =   $row['resource_origin'];
     $e_description  =  $row['resource_description'];
-    $e_file = $row['resource_file'];
+    $e_file = $row['resource_file_name'];
     $e_type = $row['resource_type'];
 ?>
 
@@ -42,7 +42,7 @@ $row=mysqli_fetch_array($run);
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Edit Resource<?php echo $e_name ;?></h1>
+                        <h1 class="h3 mb-0 text-gray-800">Edit Resource</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -60,17 +60,17 @@ $row=mysqli_fetch_array($run);
 											<label>Resource Name</label>
 											<input type="text" class="form-control"  name="n_name1" value='<?php echo $e_name;?>' >
 										</div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
 											<label>Resource Origin</label>
 											<input type="text" class="form-control"  name="n_origin1" value="<?php echo $e_origin;?>">
-										</div>
+										</div> -->
 										<div class="form-group">
 											<label >Resource Description</label>
 											<textarea class="form-control"  rows="5" name="n_description1"><?php echo $e_description;?></textarea>
 										</div>
                                         <div class="form-group">
                                             <label >Upload File</label>
-                                            <input type="file" class="form-control-file" name="n_file1" value="<?php echo $e_file;?>" >
+                                            <input type="file" class="form-control-file" name="file" value="<?php echo $e_file;?>" >
                                         </div>
 										<div class="form-group">
                                             <label >News Type:</label>
@@ -86,29 +86,40 @@ $row=mysqli_fetch_array($run);
                                                      </select>
 										</div>
 										<div class="form-group">
-											<input class="btn btn-success" type="submit" name="update" value="Edit Resource">
+											<input class="btn btn-success" type="submit" name="submit" value="Edit Resource">
 										</div>
                                         <?php
-                                            if(isset($_POST["update"]))
+                                            if(isset($_POST["submit"]))
                                             {
-                                            $n_name =   $_POST['n_name1'];
-                                            $n_origin =   $_POST['n_origin1'];
-                                            $n_description  =  $_POST['n_description1'];
-                                            $n_file= $POST['n_file1'];
-                                            $n_type = $_POST['n_type1'];
-
-                                            // $query1="UPDATE resource SET (`resource_name`, `resource_origin`, `resource_description`, `resource_type`) VALUES ('$n_name', '$n_origin', '$n_description' , '$n_type') where news_id='$edit_id'";
-                                            $query1= "UPDATE resource SET resource_name='$n_name', resource_origin='$n_origin', resource_description='$n_description', resource_file='$n_file', resource_type='$n_type' where resource_id='$edit_id'";
-
-                                            if(mysqli_query($conn,$query1))
-                                            {
+                                             $n_name =   $_POST['n_name1'];
+                                             $n_origin =   $_POST['n_origin1'];
+                                             $n_description  =  $_POST['n_description1'];
+                                             $n_type = $_POST['n_type1'];
+                                             
+                                             $file= $_FILES['file'];
+                                             $fileName= $file['name'];
+                                             $fileTmpName = $_FILES['file']['tmp_name'];
+                                             
+                                             // $fileExt = explode('.',$filename);
+                                             // $fileActualExt = strtolower(end($fileExt));
+                                             // $allowed = array('jpg','jpeg','png','pdf');
+                                         
+                                             // $fileNameNew = $n_name.".".$fileActualExt;
+                                         
+                                             $fileDestination = '../uploads/'.$fileName;
+                                             move_uploaded_file($fileTmpName, $fileDestination);
+                                             header("location: resource.php");
+                                             $query1= "UPDATE resource set resource_name='$n_name' ,resource_origin='$fileDestination',resource_description='$n_description',resource_file_name='$fileName',resource_type='$n_type' where resource_id='$edit_id'";
+                                             if(mysqli_query($conn,$query1))
+                                             {
                                                 echo "<script>window.open('resource.php?updated=Record Has Been Updated','_self')</script>";
-                                            }
-                                            else{
-                                                echo "<div class='alert alert-danger' role='alert'> <b> Error!!! </b> <br>This Number is already in use. Please check the number you are trying to update</div>";
-                                            echo $query1;
-                                            }
-                                            }
+                                            //  echo $query1;
+                                             }   
+                                             else{
+                                                 echo "<div class='alert alert-danger' role='alert'> <b> Error!!! </b> <br>This Number is already in use. Please check the number you are trying to update</div>";
+                                            //  echo $query1;
+                                             }
+                                         }
 
                                         ?>
 									</form>

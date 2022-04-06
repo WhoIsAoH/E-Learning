@@ -26,6 +26,7 @@ $countNews = "Select * from news";
     $countResource= "select * from resource";
     $resourceResult = mysqli_query($conn, $countResource);
     $resourceNum = mysqli_num_rows($resourceResult);
+    $resource_id_add = $row['resource_id'];
 
     $countEnrolled= "select * from record";
     $enrolledResult = mysqli_query($conn, $countEnrolled);

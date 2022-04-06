@@ -128,7 +128,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     <hr>
                                     
                                     <div class="text-center">
-                                        <a class="small" href="../users/login.php">login as Normal User</a>
+                                        <a class="small" href="../login.php">login as Normal User</a>
                                     </div>
                                 </div>
                             </div>
