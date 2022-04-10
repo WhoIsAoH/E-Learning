@@ -28,11 +28,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } 
             else{
                 $showError = "Invalid Credentials";
-                // echo $sql;
-                // echo $result;
-                // echo $num;
-                // echo $password;
-                // echo $row['user_password'];
             }
         }
         
