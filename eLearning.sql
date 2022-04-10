@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2022 at 05:41 PM
+-- Generation Time: Apr 10, 2022 at 12:47 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -138,7 +138,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_password`, `user_contact`, `user_type_ids`) VALUES
 (1, 'admin', 'admin@admin.admin', 'admin', '9876543210', 1),
-(2, 'student', 'student@student.student', 'student', '1230456789', 2);
+(2, 'student', 'student@student.student', 'student', '1230456789', 2),
+(3, 'test', 'test@test.test', 'test', '987655555', 2),
+(6, 'user', 'user@user.user', 'admin', '111111111', 2);
 
 -- --------------------------------------------------------
 
@@ -227,6 +229,7 @@ ALTER TABLE `resourceType`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `user_name` (`user_name`),
   ADD KEY `type` (`user_type_ids`);
 
 --
@@ -285,7 +288,7 @@ ALTER TABLE `resourceType`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `userType`
