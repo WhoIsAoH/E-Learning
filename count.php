@@ -1,6 +1,6 @@
 <div class="row">
 
-    <!-- No Of available  -->
+    <!-- No Of available resources  -->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <!-- Pending Requests Card Example -->
+    <!-- No Of available News-->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
             <div class="card-body">
