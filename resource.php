@@ -26,7 +26,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Available Resources</h1>
-        <a href="add_resource.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add Resource</a>
+        <a href="new_request.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Request Resource</a>
     </div>
 
     <!-- Content Row -->
