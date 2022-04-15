@@ -58,7 +58,7 @@ $row=mysqli_fetch_array($run);
             	<p class="h4"><?php echo $e_description;?></h4>
                 <!-- <p class="h4"><?php echo $e_file;?></h4> -->
                 <p class="h5"><?php echo $e_type;?></h5>
-                <a class="h7" href=uploads/<?php echo $e_file?>>Download Resource</a>
+                <a class="h7" href=../uploads/<?php echo $e_file?>>Download Resource</a>
             </div>
         </div>
     </div>
