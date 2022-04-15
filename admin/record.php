@@ -64,8 +64,7 @@
                     echo "<tr>";
                     echo "<td>" . $row['resource_name'] . "</td>";
                     $id=$row['resource_ids'];
-                    echo "<td style='float: right'>"."<a class='btn btn-success' href='view_resource.php?view=$id'>view</a>";
-                    // ." \t"."<a class='btn btn-primary' href='edit_resource.php?edit=$id'>Edit</a>"." \t"."<a class='btn btn-danger' href='unenroll_resource.php?del=$id'>unenroll</a>"."</td>";
+                    echo "<td style='float: right'>"."<a class='btn btn-success' href='enroll_resource.php?enroll=$id'>Enroll</a>"." \t"."<a class='btn btn-primary' href='edit_resource.php?edit=$id'>Edit</a>"." \t"."<a class='btn btn-danger' href='delete_resource.php?del=$id'>delete</a>"."</td>";
                     echo "</tr>";
                     }
                     echo "</table>";
