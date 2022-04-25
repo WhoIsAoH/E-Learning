@@ -11,12 +11,12 @@ if(isset($_POST["submit"]))
     $u_password = $_POST['user_password1'];
     $u_cpassword = $_POST['user_cpassword1'];
 
-    echo $u_password;
-    echo "---";
-    echo $u_cpassword;
-    echo $u_username;
-    echo $u_email;
-    echo $u_contact;
+    // echo $u_password;
+    // echo "---";
+    // echo $u_cpassword;
+    // echo $u_username;
+    // echo $u_email;
+    // echo $u_contact;
 
     if($u_password == $u_cpassword){
         include 'conn.php';
@@ -93,7 +93,7 @@ if(isset($_POST["submit"]))
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user" action="#" method="post">
+                            r
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user"
